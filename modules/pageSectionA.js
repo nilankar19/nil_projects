@@ -3,8 +3,9 @@ import { userlink, userProfile, ongoingProject } from "../pages/api/profileApi";
 import { getImageUrl } from "../component/getimageurl";
 import Image from "next/image";
 import { v4 as uuidV4 } from "uuid";
+import { useEffect, useState } from "react";
 
-
+import h from "../pages/api/hello";
 
 
 
@@ -75,8 +76,24 @@ function OngoingProject(props) {
 
 
 
-
 export function PageSectionA() {
+  const [o, setO] = useState(null);
+  const [lodaing, setLoding] = useState(false)
+ const apiCall = async ()=> {
+
+
+    setLoding(true);
+    fetch("/api/profileApi").then(async (res) => {
+      await res.json().then((d) => {
+        const ds = JSON.parse(d);
+        setO(ds.projectlist[0].projectName);
+        console.log(ds);
+        setLoding(false);
+      });
+    });
+
+}
+
 
   return (
     <>
@@ -85,7 +102,10 @@ export function PageSectionA() {
       <div className="main1">
         <Link url={userlink} className={"linktree-list"}/>
         {/* description */}
-        <div className="card">{userProfile[0].description}</div>
+        <div className="card">{userProfile[0].description}</div><br/>
+
+        <div className="card" onClick={()=>{apiCall()}}>{o}</div>
+
 
         {/* skills card */}
         <div className="card-btn">
@@ -97,6 +117,7 @@ export function PageSectionA() {
         {/* ongoing project */}
         <OngoingProject className={"cards-ongoing-project"} />
       </div>
+
 
     </>
   );

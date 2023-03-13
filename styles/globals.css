@@ -1,3 +1,6 @@
+:root{
+  --header:  rgb(33 221 158);
+}
 html,
 body {
   width: 100%;
@@ -29,7 +32,8 @@ ul {
 /* pageSectionA */
 .main1 {
   z-index: -123454545;
-  background-image: url('../public/assets/img/h1.jpg');
+
+
   background-size: cover;
   background-repeat: no-repeat;
   /* background-position: center; */
