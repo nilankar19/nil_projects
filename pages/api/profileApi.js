@@ -20,17 +20,17 @@ export const userlink = [
   {
     id: 0,
     imageId: "1",
-    url: "www.github.com/space",
+    url: "https://www.github.com/nilankar19",
   },
   {
     id: 1,
     imageId: "2",
-    url: "www.linkdin.com/qwerty19",
+    url: "https://www.linkdin.com/shivnil",
   },
   {
     id: 3,
     imageId: "3",
-    url: "www.google.com/capslock19",
+    url: "https://twitter",
   },
 ];
 
@@ -153,9 +153,12 @@ export const projectlist = [
     qrcode:"2"
   },
 ];
-const profileData = [userProfile,userlink,projectlist]
+
+
 export default async function h(req, res) {
   console.log(req.url);
-  res.redirect("../login?asd=er");
-  // res.status(200).json(profileData)
+  const profileData = JSON.stringify({userProfile,userlink,projectlist});
+  // res.redirect("../login?asd=er");
+
+  res.status(200).json(profileData)
 }

@@ -7,7 +7,7 @@ function UrlList(props) {
         <a
           key={data.id}
           href={data.url}
-          target="_blank"
+          target="blank"
           rel="noopener noreferrer"
         >
           {data.url}

@@ -3,7 +3,8 @@ import { url } from "url";
 export default async function h(req, res) {
 
 
-
-
-  res.status(200).json({ name: 'John Doe' })
+ console.log(req.url);
+ let data = { name: 'John Doe' }
+ let dd = JSON.stringify(data)
+ res.status(200).json(dd)
 }
