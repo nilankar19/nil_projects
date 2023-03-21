@@ -58,9 +58,10 @@
 
 }
 .cardImgDiv{
-    width: 24rem;
-    height: 2rem;
+    width: 17rem;
+    height: 8rem;
     background-color: #f7797d;
+    border-bottom-right-radius: 190px;
     transition: 0.7s;
 }
 .cardImgDiv:hover{

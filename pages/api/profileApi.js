@@ -108,17 +108,21 @@ export const ongoingProject = [
 export const projectlist = [
   {
     id: 0,
+    projectId:101,
     projectName: "random-password-generator",
     frontend: "NextJs",
     backend: "nodeJs | mongodb",
     middleware: "firebase | mongoose",
     date: "7-10-2022",
     url: "www.nilankar19.github.io/password-generator",
+    description:{
+      details:"It is a web application built using the Next.js framework, with user authentication functionality implemented using Node.js, MongoDB, and Firebase. Here is a diagram that summarizes the various components of your application and how they interact with each other:"
+      ,diagram:""
+    },
     diploy: "www.github.com",
-    imageId: "0",
+    imageId: "101",
     qrcode:"2"
-  },
-  {
+  }, {
     id: 1,
     projectName: "random-password-generator",
     frontend: "NextJs",

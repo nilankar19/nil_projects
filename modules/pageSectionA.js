@@ -1,124 +1,127 @@
 import Link from "../component/link";
 import { userlink, userProfile, ongoingProject } from "../pages/api/profileApi";
+import { h } from "../pages/api/profile";
 import { getImageUrl } from "../component/getimageurl";
 import Image from "next/image";
 import { v4 as uuidV4 } from "uuid";
 import { useEffect, useState } from "react";
+// import Worker from 'worker-loader!../public/worker.js';
 
-import h from "../pages/api/hello";
-
-
-
-
-// skill section
-function Frontend(props){
-  if (props.path === "frontend") {
-    let frontend =  userProfile[0].skills[0].frontend.map((card) => {
-      return (<li key={uuidV4()} className="card-btn-small">{card}</li>);
-    })
-
-    return (
-      <ul key={uuidV4()} className="skill-card">{frontend}</ul>
-    )
-  }
-
-  if (props.path === "backend") {
-    let frontend =  userProfile[0].skills[0].backend.map((card) => {
-      return (<li key={uuidV4()} className="card-btn-small">{card}</li>);
-    })
-
-    return (
-      <ul key={uuidV4()} className="skill-card">{frontend}</ul>
-    )
-  }
-
-  if (props.path === "middleware") {
-    let frontend =  userProfile[0].skills[0].middleware.map((card) => {
-      return (<li key={uuidV4()} className="card-btn-small">{card}</li>);
-    })
-
-    return (
-      <ul key={uuidV4()} className="skill-card">{frontend}</ul>
-    )
-  }
+// import h from "../pages/api/hello";
 
 
+
+
+
+function ParentComponent() {
+  const [frontendSkills, setFrontendSkills] = useState([]);
+  const [backendSkills, setBackendSkills] = useState([]);
+  const [middlewareSkills, setMiddlewareSkills] = useState([]);
+  const [ongoingProjects, setOngoingProjects] = useState([]);
+
+  useEffect(() => {
+
+  
+
+    setFrontendSkills(userProfile[0].skills[0].frontend);
+    setBackendSkills(userProfile[0].skills[0].backend);
+    setMiddlewareSkills(userProfile[0].skills[0].middleware);
+    setOngoingProjects(ongoingProject);
+  }, []);
+
+  return (
+    <>
+    <div className="card-btn">
+      <Frontend skills={frontendSkills} />
+      <Backend skills={backendSkills} />
+      <Middleware skills={middlewareSkills} />
+    </div>
+    <OngoingProject projects={ongoingProjects} />
+    </>
+  );
 }
 
-//ongoing project
+function Frontend(props) {
+  const skillList = props.skills.map((card) => {
+    return <li key={uuidV4()} className="card-btn-small">{card}</li>;
+  });
+
+  return <ul key={uuidV4()} className="skill-card">{skillList}</ul>;
+}
+
+function Backend(props) {
+  const skillList = props.skills.map((card) => {
+    return <li key={uuidV4()} className="card-btn-small">{card}</li>;
+  });
+
+  return <ul key={uuidV4()} className="skill-card">{skillList}</ul>;
+}
+
+function Middleware(props) {
+  const skillList = props.skills.map((card) => {
+    return <li key={uuidV4()} className="card-btn-small">{card}</li>;
+  });
+
+  return <ul key={uuidV4()} className="skill-card">{skillList}</ul>;
+}
+
 function OngoingProject(props) {
- let projectlist = ongoingProject.map((card) => {
+  const projectList = props.projects.map((card) => {
     return (
-
-        <li key={uuidV4()} className="cards-li-project">
-          <Image
+      <li key={card.id} className="cards-li-project">
+       <Image
           className="icon"
-            src={getImageUrl(card)}
-            width={32}
-            height={32}
-            alt={card.projectName}
-          />
-          <a className="card-li-d" href={card.url}>
-            <span >{card.projectName}</span>
-            <span>tech: {card.techStack}
-            <span className="bg"> date: {card.date}</span></span>
-          </a>
-        </li>
-
+          src={getImageUrl(card)}
+          width={32}
+          height={32}
+          alt={card.projectName}
+        />
+        <a className="card-li-d" href={card.url}>
+          <span>{card.projectName}</span>
+          <span>
+            tech: {card.techStack}
+            <span className="bg"> date: {card.date}</span>
+          </span>
+        </a>
+      </li>
     );
-  })
+  });
 
-  return <div className={props.className}>on_going project<ul className="card-ul">{projectlist}</ul></div>
+  return (
+        <div className="cards-ongoing-project">
+          on_going project
+          <ul className="card-ul">{projectList}</ul>
+        </div>
+      );
+
 }
-
-
-
-
-
 
 export function PageSectionA() {
-  const [o, setO] = useState(null);
-  const [lodaing, setLoding] = useState(false)
- const apiCall = async ()=> {
+  const [userProfile, setUserProfile] = useState([
+    {
+      id: uuidV4(),
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    },
+  ]);
 
-
-    setLoding(true);
-    fetch("/api/profileApi").then(async (res) => {
-      await res.json().then((d) => {
-        const ds = JSON.parse(d);
-        setO(ds.projectlist[0].projectName);
-        console.log(ds);
-        setLoding(false);
-      });
-    });
-
-}
 
 
   return (
     <>
-
-
       <div className="main1">
-        <Link url={userlink} className={"linktree-list"}/>
+        <Link url={userlink} className="linktree-list" />
         {/* description */}
-        <div className="card">{userProfile[0].description}</div><br/>
+        <div className="card">{userProfile[0].description}</div>
+        <br />
 
-        <div className="card" onClick={()=>{apiCall()}}>{o}</div>
+        {/* <div className="card" onClick={() => apiCall()}>
+          {o}
+        </div> */}
 
+        <ParentComponent />
 
-        {/* skills card */}
-        <div className="card-btn">
-          <Frontend path="frontend" />
-          <Frontend path="backend" />
-          <Frontend path="middleware" />
-        </div>
-
-        {/* ongoing project */}
-        <OngoingProject className={"cards-ongoing-project"} />
       </div>
-
-
     </>
   );
 }
