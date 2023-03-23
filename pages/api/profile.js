@@ -1,4 +1,4 @@
-let responseApi = {
+export let responseApi = {
   user: [
     {
       profile: {
@@ -188,7 +188,7 @@ let responseApi = {
 
 
 let result = JSON.stringify(responseApi)
-console.log(result);
+// console.log(result);
 
 export default async function h(req, res) {
   // query the path

@@ -5,6 +5,7 @@ import { getImageUrl } from "../component/getimageurl";
 import Image from "next/image";
 import { v4 as uuidV4 } from "uuid";
 import { useEffect, useState } from "react";
+import SocialMedia from "@/component/socialmedia";
 // import Worker from 'worker-loader!../public/worker.js';
 
 // import h from "../pages/api/hello";
@@ -21,12 +22,15 @@ function ParentComponent() {
 
   useEffect(() => {
 
-  
+
+
+
 
     setFrontendSkills(userProfile[0].skills[0].frontend);
     setBackendSkills(userProfile[0].skills[0].backend);
     setMiddlewareSkills(userProfile[0].skills[0].middleware);
     setOngoingProjects(ongoingProject);
+  
   }, []);
 
   return (
@@ -120,6 +124,7 @@ export function PageSectionA() {
         </div> */}
 
         <ParentComponent />
+        <SocialMedia />
 
       </div>
     </>

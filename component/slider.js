@@ -48,21 +48,21 @@ function imageElm({ urls }) {
         // clearTimeout()
       }
       ++setintervalCount
-      console.log(setintervalCount,"set");
-      console.log("state",state);
+      // console.log(setintervalCount,"set");
+      // console.log("state",state);
       if(state == 0){
          w = 100
          t++
         state = 2
         }
-      console.log("null,",state);
+      // console.log("null,",state);
       if (t == slideClass.length) {
         t = 0
         // w = 100
       }
        w = w - 50
       let ws = w.toString()
-      console.log("t",t);
+      // console.log("t",t);
       let cl = slideimgid[t]
       if (state > 0) {
 
