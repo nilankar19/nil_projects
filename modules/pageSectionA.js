@@ -1,5 +1,5 @@
 import Link from "../component/link";
-import { userlink, userProfile, ongoingProject } from "../pages/api/profileApi";
+import { responseApi } from "../pages/api/profile";
 import { h } from "../pages/api/profile";
 import { getImageUrl } from "../component/getimageurl";
 import Image from "next/image";
@@ -26,11 +26,11 @@ function ParentComponent() {
 
 
 
-    setFrontendSkills(userProfile[0].skills[0].frontend);
-    setBackendSkills(userProfile[0].skills[0].backend);
-    setMiddlewareSkills(userProfile[0].skills[0].middleware);
-    setOngoingProjects(ongoingProject);
-  
+    setFrontendSkills(responseApi.user[0].profile.skills[0].frontend);
+    setBackendSkills(responseApi.user[0].profile.skills[0].middleware);
+    setMiddlewareSkills(responseApi.user[0].profile.skills[0].backend);
+    setOngoingProjects(responseApi.user[0].profile.currentProjects);
+
   }, []);
 
   return (
@@ -105,7 +105,7 @@ export function PageSectionA() {
     {
       id: uuidV4(),
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "It's Nilankar.fullstack developer ",
     },
   ]);
 
@@ -114,7 +114,7 @@ export function PageSectionA() {
   return (
     <>
       <div className="main1">
-        <Link url={userlink} className="linktree-list" />
+        <Link url={responseApi.user[0].profile.linktree} className="linktree-list" />
         {/* description */}
         <div className="card">{userProfile[0].description}</div>
         <br />
